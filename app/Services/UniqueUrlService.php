@@ -14,12 +14,12 @@ class UniqueUrlService
             return end($array);
         })->all();
 
-        $randomString = Str::random(6);
+        $hash = Str::random(6);
 
-        if (in_array($randomString, $stringAppends, true)) {
+        if (in_array($hash, $stringAppends, true)) {
             $this->handle();
         }
 
-        return $randomString;
+        return $hash;
     }
 }

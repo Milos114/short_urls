@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UrlRequest;
 use App\Models\Url;
 use App\Services\GoogleSafeBrowsingApiService;
@@ -32,9 +33,12 @@ class UrlShortenerController extends Controller
             ]);
         }
 
+        $hash = $uniqueUrlService->handle();
+
         $url = Url::create([
             'long_url' => $request->get('url'),
-            'short_url' => url()->current() . '/' . $uniqueUrlService->handle()
+            'short_url' => url('') . '/url/' . $hash,
+            'hash' => $hash
         ]);
 
         return response()->json(['data' => $url]);
