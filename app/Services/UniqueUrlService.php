@@ -9,11 +9,9 @@ class UniqueUrlService
 {
     public function handle(): string
     {
-        $hash = Str::random(6);
-
-        if (in_array($hash, Url::pluck('hash')->all(), true)) {
-            $this->handle();
-        }
+        do {
+            $hash = 'Str::random(6)';
+        } while (in_array($hash, Url::pluck('hash')->all(), true));
 
         return $hash;
     }
